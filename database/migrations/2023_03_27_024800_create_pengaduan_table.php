@@ -8,8 +8,10 @@ class CreatePengaduanTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('pengaduan', function (Blueprint $table) {
             $table->id();
@@ -18,15 +20,18 @@ class CreatePengaduanTable extends Migration
             $table->text('isi_laporan');
             $table->string('foto');
             $table->enum('status', ['pending', 'proses', 'selesai']);
+            $table->enum('jenis_aduan', ['privasi', 'public']);
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('pengaduan');
     }
-};
+}

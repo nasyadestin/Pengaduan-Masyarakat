@@ -19,6 +19,12 @@ class PengaduanController extends Controller
         $pengaduans = pengaduan::where('nik', Auth::guard('masyarakat')->user()->nik)->latest()->paginate(5);
         return view('pengaduan.index', compact('pengaduans'));
     }
+    public function indexPublic()
+    {   
+        
+        $pengaduans = pengaduan::where( 'jenis_aduan','=' ,'public')->latest()->with('getDataMasyarakat', 'getDataTanggapan')->paginate(5);
+        return view('pengaduan.indexPublic', compact('pengaduans'));
+    }
     public function indexPetugas()
     {
         $pengaduans = pengaduan::latest()->paginate(5);
@@ -48,6 +54,7 @@ class PengaduanController extends Controller
             'isi_laporan' => 'required',
             'foto' => 'image|mimes:jpg,svg,png',
             'nik' => 'required',
+            'jenis_aduan' => 'required'
         ]);
 
         if ($request->file('foto')) {
@@ -56,13 +63,13 @@ class PengaduanController extends Controller
             $pengaduanImage = 'assets/images' . $fileImage;
 
             $validateData['foto'] = $pengaduanImage;
-            $validateData['status'] = "0";
+            $validateData['status'] = "pending";
 
             Pengaduan::create($validateData);
             
         } else {
             $validateData['foto'] = "-";
-            $validateData['status'] = "0";
+            $validateData['status'] = "pending";
             
             Pengaduan::create($validateData);
         }
@@ -110,12 +117,14 @@ class PengaduanController extends Controller
             $data->tgl_pengaduan = $request->tgl_pengaduan;
             $data->isi_laporan = $request->isi_laporan;
             $data->foto = $pengaduanImage;
+            $data->jenis_aduan = $request->jenis_aduan;
             $data->update();
         }else{
             $data = Pengaduan::findOrFail($id);
             $data->tgl_pengaduan = $request->tgl_pengaduan;
             $data->isi_laporan = $request->isi_laporan;
             $data->foto = $request->foto_lama;
+            $data->jenis_aduan = $request->jenis_aduan;
             $data->update();
         }
         return redirect()->route('pengaduan.index')->with('success', 'Berhasil Mengubah Pengaduan');
@@ -131,14 +140,28 @@ class PengaduanController extends Controller
     {
         $pengaduan = pengaduan::findOrFail($id);
         $tanggapan = tanggapan::where('id_pengaduan', $id);
+        if ($pengaduan->status == 'selesai' || $pengaduan->status == 'proses') {
+            return back()->with('error', 'tidak dapat menghapus data');
+         }
         if ($pengaduan && $tanggapan){
             $pengaduan->delete();
             $tanggapan->delete();
-            if (Auth::guard('masyarakat')->user()){
+            if (Auth::guard('masyarakat')->user ()){
                 return redirect()->route('pengaduan.index')->with('success', 'Berhasil Menghapus Pengaduan');
             }else{
-                return redirect()->route('pengaduan.indexPetugas')->with('success', 'Berhasil menghapus pengaduan.');
+                return redirect()->route('pengaduan.indexPetugas')->with('success', 'Berhasil menghapus pengaduan.');
             }
+
+            if ($pengaduan->status == 'selesai' || $pengaduan->status == 'proses') {
+                return back()->with('error', 'tidak dapat menghapus data');
+             } 
         }
+         
+    }
+
+    public function pengaduanLanding()
+    {
+        $totalAduan = Pengaduan::count();
+        return view('welcome', compact('totalAduan'));
     }
 }

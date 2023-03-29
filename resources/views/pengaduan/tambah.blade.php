@@ -42,8 +42,18 @@
             <textarea name="isi_laporan" class="form-control" cols="30" rows="4"></textarea>
           </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+            
+          </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 mb-2">
-          <strong>Foto :</strong>
+          <label for="jenis_aduan" class="form-label">Jenis Pengaduan</label><br>
+            <select name="jenis_aduan" class="form-control" aria-label='jenis_aduan'>
+              <option value="public">public</option>
+              <option value="privasi">privasi</option>
+            </select>
+            <strong>Foto :</strong>
           <div class="input-group mb-3">
             <input type="file" name="foto" class="form-control" id="inputGroupFile02">
             <input type="hidden" name="nik" class="form-control" value="{{ Auth::guard('masyarakat')->user()->nik }}">
@@ -51,7 +61,7 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary w-50">Submit</button>
         </div>
       </div>
     </div>

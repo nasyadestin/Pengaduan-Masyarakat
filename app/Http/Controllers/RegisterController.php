@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Models\Masyarakat;
-
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller

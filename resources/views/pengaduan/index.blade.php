@@ -1,9 +1,22 @@
 @extends('layouts.navmasyarakat')
 @section('content')
-<h4 class="my-3">Daftar Aduan Desa Bendungan </h4>
-    <div class="button my-2">
-        <a type="button" class="btn btn-success" href="{{ url('/pengaduan/tambah') }}">Create</a>
+
+<div class="card mt-4">
+    <div class="card-body py-4 px-4 d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+            <div class="ms-3 name">
+                <h5 class="font-bold">Hello! {{ Auth::guard('masyarakat')->user()->nama }}</h5>
+            </div>
+        </div>
     </div>
+</div>
+ 
+<div class="button my-2 mt-2">
+    <a type="button" class="btn btn-success px-4 " href="{{ url('/pengaduan/tambah') }}">
+        Create</a>
+</div>
+<h4 class="my-3">Daftar Aduan  </h4>
+    
     @if ($errors->any())
     <div class="alert alert-danger">
         <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -33,6 +46,7 @@
                 <th scope="col" class="text-center">Tanggal Pengaduan</th>
                 <th scope="col">Isi Laporan</th>
                 <th scoope="col">Status</th>
+                <th scope="col">Jenis Aduan</th>
                 <th scope="col">Foto</th>
                 <th>Action</th>
             </tr>
@@ -44,6 +58,7 @@
                 <td class="text-center">{{ $pengaduan->tgl_pengaduan }}</td>
                 <td>{{ $pengaduan->isi_laporan }}</td>
                 <td>{{ $pengaduan->status }}</td>
+                <td>{{ $pengaduan->jenis_aduan}}</td>
                 <td><img src="{{ asset($pengaduan->foto) }}" alt="" width="100px"></td>
                 <td>
                     <form action="/pengaduan/delete/{{$pengaduan->id}}" method="POST">
@@ -60,6 +75,5 @@
             @endforeach
         </tbody>
     </table>
-
-    {{$pengaduans->links()}}
+    
 @endsection

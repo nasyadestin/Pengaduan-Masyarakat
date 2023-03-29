@@ -9,7 +9,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <h6 class="navbar-brand ms-4 " href="#">Form Pengaduan Masyarakat</h6>
+  <h6 class="navbar-brand ms-4 " href="#">Kotak Aduan Masyarakat Desa Bendungan</h6>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -42,6 +42,7 @@
       <h5>Form Pengaduan Masyarakat</h5>
             @if (Auth::guard('masyarakat')->user())
               <a class="{{ request()->is('pengaduan') ? 'active' : '' }} nav-link text-white" href="{{ route('pengaduan.index') }} ">Daftar Aduan</a>
+              <a class="{{ request()->is('pengaduan') ? 'active' : '' }} nav-link text-white" href="{{ route('pengaduan.indexPublic') }} ">Daftar Aduan Public</a>
             @endif
             @if (Auth::guard('petugas')->user())
               <a class="{{ request()->is('petugas/masyarakat') ? 'active' : '' }} nav-link text-white" href="{{ route('masyarakat.index') }}">Daftar Masyarakat</a>

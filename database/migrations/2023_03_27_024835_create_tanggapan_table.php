@@ -8,8 +8,10 @@ class CreateTanggapanTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('tanggapan', function (Blueprint $table) {
             $table->id();
@@ -23,9 +25,11 @@ class CreateTanggapanTable extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('tanggapan');
     }
-};
+}

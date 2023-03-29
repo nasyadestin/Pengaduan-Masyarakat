@@ -14,7 +14,7 @@
 			<div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
 		  		<div class="card col-lg-5 mx-auto my-5 rounded">
 					<div class="card-body px-5 py-5">
-			  			<h3 class="card-title text-left mb-3">Login </h3>
+			  			<h3 class="card-title text-center mb-3">Login</h3>
 							@if(request()->is('login'))
 							<form method="POST" action="/login">
 								@csrf
@@ -27,10 +27,10 @@
 									<input type="password" name="password" class="form-control p_input">
 									<input type="hidden" name="role" value="petugas">
 								</div>
-								<div class="d-flex justify-content-between mt-4">
-									<p class="">Belum punya akun? <a href="/register">Register</a> </p>
-									<button type="submit" class="btn-daftar btn btn-secondary col-5">Masuk</button>
-								</div>
+								<center><button type="submit" class="btn-daftar btn mt-4 btn-secondary col-5">Masuk</button>
+									<h6 class="mt-4	">Belum punya akun? <a href="/register" class="text-decoration-none text-primary">Register</h6> </p>
+									<small class=""> <a href="/petugas/login" class="text-decoration-none text-dark">Login Sebagai Petugas</a> </small>
+								</center>
 							</form>
 							@else
 							<form method="POST" action="/petugas/login">

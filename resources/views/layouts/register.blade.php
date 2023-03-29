@@ -38,10 +38,10 @@
 				  <label>No Telp </label>
 				  <input type="number" name="telp" class="form-control p_input">
 				</div>
-				<div class="d-flex justify-content-between mt-4">
-                    <p class="">Sudah punya akun? <a href="{{ url('/login') }}">Login</a> </p>
-                    <button type="submit" class="btn-daftar btn btn-secondary col-5">Daftar</button>
-                </div>
+				<center>
+					<button type="submit" class="btn-daftar mt-4 btn btn-secondary col-5">Daftar</button>
+                    <h6 class="mt-3">Sudah punya akun? <a href="{{ url('/login') }}" class="text-decoration-none">Login</a> </h6>
+				</center>   
             </form>
             
 		  </div>

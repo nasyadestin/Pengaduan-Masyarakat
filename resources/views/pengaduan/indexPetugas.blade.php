@@ -31,8 +31,10 @@
             <tr>
                 <th scope="col" class="text-center">No</th>
                 <th scope="col" class="text-center">Tanggal Pengaduan</th>
+                <th scoope="col">Nama</th>
                 <th scope="col">Isi Laporan</th>
                 <th scoope="col">Status</th>
+                <th scope="col">Jenis Aduan</th>
                 <th scope="col">Foto</th>
                 <th>Action</th>
             </tr>
@@ -42,8 +44,10 @@
             <tr>
                 <td class="text-center">{{ $loop->iteration }}</td>
                 <td class="text-center">{{ $pengaduan->tgl_pengaduan }}</td>
+                <td>{{ $pengaduan->getDataMasyarakat->nama }}</td>
                 <td>{{ $pengaduan->isi_laporan }}</td>
                 <td>{{ $pengaduan->status }}</td>
+                <td>{{ $pengaduan->jenis_aduan}}</td>
                 <td><img src="{{ asset($pengaduan->foto) }}" alt="" width="100px"></td>
                 <td>
                     <form action="/petugas/pengaduan/delete/{{$pengaduan->id}}" method="POST">

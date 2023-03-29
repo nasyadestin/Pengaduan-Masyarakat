@@ -33,6 +33,12 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 mb-2">
+          <label for="jenis_aduan" class="form-label">Jenis Pengaduan</label><br>
+            <select name="jenis_aduan" class="form-control" aria-label='jenis_aduan'>
+              <option value="public">public</option>
+              <option value="privasi">privasi</option>
+            </select>
+        <div class="col-xs-12 col-sm-12 col-md-12 mb-2">
           <strong>Foto :</strong>
           @if ($pengaduan->foto != "-")
             <img class="d-block mb-2" src="{{ asset($pengaduan->foto) }}" alt="" width="100px">
